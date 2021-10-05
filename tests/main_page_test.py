@@ -1,7 +1,8 @@
 from selenium import webdriver
-import time
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
 import pytest
+import time
 from conftest import link
 
 
@@ -167,8 +168,67 @@ def test_message_for_blankNameError_without_any_choices(browser):
     assert actual_message == "Поле имя не может быть пустым", "Пустая строка"
 
 
-def test_multiple_data_addition_without_any_choices(browser):
-    for _ in range(5):
+@pytest.mark.parametrize(
+    ["email", "error_message"],
+    [
+        ("@protei.ru", "Отсутсвует текст до @ "),
+        ("", "Пустая строка"),
+    ],
+)
+def test_close_message_window_after_error(browser, email, error_message):
+
+    input_dataEmail = browser.find_element_by_id("dataEmail")
+    input_dataEmail.send_keys("alex@poitey.ru")
+
+    input_dataName = browser.find_element_by_id("dataName")
+    input_dataName.send_keys("")
+
+    button = browser.find_element_by_id("dataSend")
+    button.click()
+
+    actual_message = browser.find_element_by_tag_name("a")
+
+    actual_message.click()
+    time.sleep(0.2)
+
+    with pytest.raises(NoSuchElementException):
+        actual_message = browser.find_element_by_tag_name("a")
+
+        actual_message.click()
+
+        pytest.fail("Поле с сообщением об ошибке должно быть скрыто")
+
+    assert True
+
+
+def test_close_alert_window(browser):
+    input_dataEmail = browser.find_element_by_id("dataEmail")
+    input_dataEmail.send_keys("alex@poitey.ru")
+
+    input_dataName = browser.find_element_by_id("dataName")
+    input_dataName.send_keys("alex")
+
+    button = browser.find_element_by_id("dataSend")
+    button.click()
+
+    alert = browser.find_element_by_class_name("uk-modal-close")
+    alert_text = alert.click()
+    time.sleep(0.2)
+
+    with pytest.raises(NoSuchElementException):
+        actual_message = browser.find_element_by_class_name("uk-modal-close")
+
+        actual_message.click()
+
+        pytest.fail(
+            "Поле с сообщением об успешном добавлении данных должно быть скрыто"
+        )
+
+    assert True
+
+
+def test_multiple_data_addition(browser):
+    for _ in range(4):
         input_dataEmail = browser.find_element_by_id("dataEmail")
         input_dataEmail.send_keys("alex@poitey.ru")
 
@@ -178,7 +238,17 @@ def test_multiple_data_addition_without_any_choices(browser):
         button = browser.find_element_by_id("dataSend")
         button.click()
 
-        alert = browser.find_element_by_class_name("uk-modal-content")
-        alert_text = alert.text
+        alert = browser.find_element_by_class_name("uk-modal-close")
+        alert_text = alert.click()
+        time.sleep(0.2)
 
-        assert alert_text == "Данные добавлены."
+        with pytest.raises(NoSuchElementException):
+            actual_message = browser.find_element_by_class_name("uk-modal-close")
+
+            actual_message.click()
+
+            pytest.fail(
+                "Поле с сообщением об успешном добавлении данных должно быть скрыто"
+            )
+
+        assert True
