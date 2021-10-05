@@ -1,2 +1,2 @@
-# -
-Test task for НТЦ ПРОТЕЙ 
+# НТЦ ПРОТЕЙ 
+Test task for НТЦ ПРОТЕЙ. 
