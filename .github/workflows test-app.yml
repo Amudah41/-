@@ -11,4 +11,5 @@ jobs:
       - name: Run script
         run: |
           pip install pytest selenium
+          ls -la
           py.test -x *
