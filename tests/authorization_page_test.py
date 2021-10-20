@@ -13,13 +13,15 @@ def browser():
 
 
 def test_correct_input_for_authorization_page(browser):
+    from conftest import valid_email, valid_password
+
     browser.get(link)
 
     input_loginEmail = browser.find_element_by_id("loginEmail")
-    input_loginEmail.send_keys("test@protei.ru")
+    input_loginEmail.send_keys(valid_email)
 
     input_loginPassword = browser.find_element_by_id("loginPassword")
-    input_loginPassword.send_keys("test")
+    input_loginPassword.send_keys(valid_password)
 
     button = browser.find_element_by_id("authButton")
     button.click()
