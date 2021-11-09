@@ -44,7 +44,7 @@ To run all tests except one group of marker tests you need to execute:
 pytest -s -v -m 'not marker' file name or nothing to run tests for hole directory
 ```
 
-For example
+For example,
 ```
 pytest -s -v -m 'smoke and positive' main_page_test.py
 ```
