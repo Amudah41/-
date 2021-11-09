@@ -2,7 +2,6 @@
 # Authorization form testing.
 
 ## Appearance
------
 
 ### Authorization page 
 Start page that appears after opening file.
