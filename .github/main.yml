@@ -13,4 +13,4 @@ jobs:
         run: |
           pip install selenium pytest
           ls -la
-          py.test -x .
+          pytest -x .
