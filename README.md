@@ -48,5 +48,5 @@ For example,
 ```
 pytest -s -v -m 'smoke and positive' main_page_test.py
 ```
-run tests from main_page_test.py which are both smoke and positive.
+runs tests from main_page_test.py which are both smoke and positive.
 
