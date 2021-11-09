@@ -32,7 +32,7 @@ To run several markered group you need to execute:
 pytest -s -v -m 'marker_1 or marker_2' file name or nothing to run tests from hole directory
 ```
 
-To run only tests that belond to several markered group you need to execute
+To run only tests that belond to several markered group you need to execute:
 
 ```
 pytest -s -v -m 'marker_1 and marker_2' file name or nothing to run tests from hole directory
