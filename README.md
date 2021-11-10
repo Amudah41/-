@@ -12,9 +12,8 @@ Start page that appears after opening file.
 Page that appears after entering correct login and password at the authorization page.
 ![Main page](images/main_page.png) 
 ## How to run tests
-----
 
-There are 6 kinds of test markers: 
+There are 6 kinds of tests markers: 
 
 1. _smoke_ : marker for smoke tests
 2. _positive_ : marker for positive tests
@@ -32,7 +31,7 @@ To run several markered group you need to execute:
 pytest -s -v -m 'marker_1 or marker_2' file name or nothing to run tests from hole directory
 ```
 
-To run only tests that belond to several markered group you need to execute:
+To run tests that belond to several markered group at the same time you need to execute:
 
 ```
 pytest -s -v -m 'marker_1 and marker_2' file name or nothing to run tests from hole directory
